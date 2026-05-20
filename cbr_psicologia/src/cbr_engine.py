@@ -1,8 +1,3 @@
-"""
-CBR Engine - camada formal do ciclo:
-Retrieve → Reuse → Revise
-"""
-
 from retrieval import retrieve_cases
 from adaptation import adapt_solution
 
@@ -60,7 +55,6 @@ def run_cbr(system, query):
         "confidence": confidence
     }
 
-    # 🔥 GARANTE QUE NUNCA "SUME" A SUGESTÃO
     print("\n=== SUGESTÃO CBR ===")
     print("Severidade sugerida:", solution["clinical_severity"])
     print("Confiança:", round(confidence, 4))

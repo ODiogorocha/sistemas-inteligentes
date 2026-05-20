@@ -3343,3 +3343,723 @@ cientificamente consistente
 ```
 
 e adequado para apresentação acadêmica.
+# Explicação Linha por Linha — evaluation.py
+
+---
+
+# Objetivo do Arquivo
+
+O arquivo `evaluation.py` calcula as métricas estatísticas do sistema CBR.
+
+---
+
+# Por que isso é importante?
+
+Depois da validação, precisamos medir:
+
+```txt
+o quão bom o sistema realmente é
+```
+
+---
+
+# O arquivo calcula
+
+| Métrica | Objetivo |
+|---|---|
+| Accuracy | taxa de acerto |
+| Precision | qualidade das previsões |
+| Recall | capacidade de encontrar casos corretos |
+| F1-score | equilíbrio entre precision e recall |
+| MAE | erro médio absoluto |
+
+---
+
+# Importação do sklearn
+
+```python
+from sklearn.metrics import (
+    accuracy_score,
+    precision_score,
+    recall_score,
+    f1_score
+)
+```
+
+---
+
+# Objetivo
+
+Utilizar métricas científicas padronizadas.
+
+---
+
+# Por que usar sklearn?
+
+Porque:
+
+- é confiável;
+- amplamente utilizado;
+- validado cientificamente;
+- padrão acadêmico.
+
+---
+
+# evaluate()
+
+```python
+def evaluate(y_true, y_pred):
+```
+
+---
+
+# Objetivo
+
+Receber:
+
+- valores reais;
+- valores previstos;
+
+e calcular métricas de classificação.
+
+---
+
+# Parâmetros
+
+| Parâmetro | Significado |
+|---|---|
+| y_true | severidades reais |
+| y_pred | severidades preditas |
+
+---
+
+# Estrutura de retorno
+
+```python
+return {
+```
+
+---
+
+# Objetivo
+
+Retornar todas as métricas organizadas.
+
+---
+
+# Accuracy
+
+```python
+"accuracy": accuracy_score(
+    y_true,
+    y_pred
+)
+```
+
+---
+
+# O que é Accuracy?
+
+Representa:
+
+```txt
+percentual total de acertos
+```
+
+---
+
+# Fórmula
+
+```txt
+accuracy =
+acertos / total
+```
+
+---
+
+# Exemplo
+
+| Total | Acertos |
+|---|---|
+| 110 | 99 |
+
+---
+
+# Resultado
+
+```txt
+0.90
+```
+
+ou:
+
+```txt
+90%
+```
+
+---
+
+# Interpretação
+
+Quanto maior:
+
+```txt
+melhor
+```
+
+---
+
+# Problema da Accuracy
+
+Ela pode enganar em datasets desbalanceados.
+
+---
+
+# Exemplo
+
+Se 95% dos casos forem:
+
+```txt
+moderate
+```
+
+o sistema pode acertar muito apenas chutando.
+
+---
+
+# Por isso usamos outras métricas
+
+---
+
+# Precision
+
+```python
+"precision": precision_score(
+```
+
+---
+
+# O que é Precision?
+
+Mede:
+
+```txt
+quantas previsões positivas estavam corretas
+```
+
+---
+
+# Fórmula
+
+```txt
+precision =
+VP / (VP + FP)
+```
+
+---
+
+# Interpretação
+
+Quando o sistema diz:
+
+```txt
+severe
+```
+
+quantas vezes ele realmente acertou?
+
+---
+
+# Exemplo
+
+| Previsto severe | Real severe |
+|---|---|
+| 20 | 18 |
+
+---
+
+# Resultado
+
+```txt
+18/20 = 0.90
+```
+
+---
+
+# Recall
+
+```python
+"recall": recall_score(
+```
+
+---
+
+# O que é Recall?
+
+Mede:
+
+```txt
+capacidade de encontrar casos reais
+```
+
+---
+
+# Fórmula
+
+```txt
+recall =
+VP / (VP + FN)
+```
+
+---
+
+# Interpretação
+
+Dos casos severe reais:
+
+```txt
+quantos o sistema conseguiu detectar?
+```
+
+---
+
+# Exemplo
+
+| Severe reais | Severe detectados |
+|---|---|
+| 20 | 17 |
+
+---
+
+# Resultado
+
+```txt
+17/20 = 0.85
+```
+
+---
+
+# F1-score
+
+```python
+"f1": f1_score(
+```
+
+---
+
+# O que é F1-score?
+
+Combina:
+
+- precision;
+- recall.
+
+---
+
+# Fórmula
+
+```txt
+F1 =
+2 * (P * R) / (P + R)
+```
+
+---
+
+# Interpretação
+
+Equilíbrio entre:
+
+- acertar;
+- detectar corretamente.
+
+---
+
+# Por que F1 é importante?
+
+Porque accuracy sozinha pode ser enganosa.
+
+---
+
+# Average="macro"
+
+```python
+average="macro"
+```
+
+---
+
+# Objetivo
+
+Calcular média equilibrada entre classes.
+
+---
+
+# Importância
+
+Evita favorecer classes maiores.
+
+---
+
+# Exemplo
+
+Se houver muitos:
+
+```txt
+moderate
+```
+
+o sistema não ficará enviesado.
+
+---
+
+# zero_division=0
+
+```python
+zero_division=0
+```
+
+---
+
+# Objetivo
+
+Evitar erro matemático.
+
+---
+
+# Problema
+
+Se uma classe nunca for prevista:
+
+```txt
+divisão por zero
+```
+
+---
+
+# Solução
+
+Retornar:
+
+```txt
+0
+```
+
+---
+
+# adaptation_error()
+
+```python
+def adaptation_error(
+```
+
+---
+
+# Objetivo
+
+Calcular:
+
+```txt
+MAE
+```
+
+---
+
+# O que é MAE?
+
+Mean Absolute Error.
+
+---
+
+# Fórmula
+
+```txt
+MAE =
+Σ |real - previsto| / n
+```
+
+---
+
+# Interpretação
+
+Erro médio absoluto.
+
+---
+
+# Exemplo
+
+| Real | Previsto |
+|---|---|
+| 5 | 4 |
+| 7 | 8 |
+
+---
+
+# Erros
+
+```txt
+1 e 1
+```
+
+---
+
+# Resultado
+
+```txt
+MAE = 1
+```
+
+---
+
+# Verificação de segurança
+
+```python
+if not true_vals:
+```
+
+---
+
+# Objetivo
+
+Evitar divisão por zero.
+
+---
+
+# Cálculo
+
+```python
+sum(
+    abs(float(t) - float(p))
+)
+```
+
+---
+
+# Objetivo
+
+Somar todos os erros absolutos.
+
+---
+
+# Divisão
+
+```python
+/ len(true_vals)
+```
+
+---
+
+# Objetivo
+
+Calcular média final.
+
+---
+
+# freq_error()
+
+Funciona da mesma forma.
+
+---
+
+# Objetivo
+
+Calcular erro da frequência semanal.
+
+---
+
+# Por que usar MAE?
+
+Porque:
+
+- é interpretável;
+- robusto;
+- simples;
+- muito usado em regressão.
+
+---
+
+# Fluxo Completo da Avaliação
+
+---
+
+# Etapa 1
+
+Validation gera:
+
+```python
+y_true
+y_pred
+```
+
+---
+
+# Etapa 2
+
+evaluation.py calcula métricas.
+
+---
+
+# Etapa 3
+
+main.py imprime resultados.
+
+---
+
+# Exemplo Real
+
+```txt
+Accuracy : 0.91
+Precision: 0.89
+Recall   : 0.88
+F1-score : 0.88
+```
+
+---
+
+# Interpretação Clínica
+
+O sistema consegue:
+
+- identificar corretamente severidades;
+- manter consistência;
+- generalizar adequadamente.
+
+---
+
+# Relação com CBR
+
+As métricas avaliam:
+
+| Etapa | Impacto |
+|---|---|
+| Similarity | retrieval correto |
+| Retrieval | vizinhos corretos |
+| Adaptation | solução correta |
+
+---
+
+# Se Similarity estiver ruim
+
+↓
+
+retrieval piora
+
+↓
+
+métricas caem.
+
+---
+
+# Compatibilidade com CBRKit
+
+O CBRKit recomenda:
+
+- avaliação quantitativa;
+- validação empírica;
+- métricas formais.
+
+---
+
+# O sistema implementa exatamente isso
+
+---
+
+# Conceitos utilizados
+
+| Conceito | Implementação |
+|---|---|
+| Classification Metrics | sklearn |
+| Error Metrics | MAE |
+| Statistical Validation | evaluate |
+| Macro Average | average="macro" |
+
+---
+
+# Por que isso é importante academicamente?
+
+Porque mostra que o projeto não é apenas funcional.
+
+Ele é:
+
+```txt
+cientificamente validado
+```
+
+---
+
+# Possíveis Perguntas do Professor
+
+---
+
+# “Por que usar F1-score?”
+
+Porque accuracy pode ser enganosa em classes desbalanceadas.
+
+---
+
+# “Por que macro average?”
+
+Para tratar todas as classes igualmente.
+
+---
+
+# “Por que usar MAE?”
+
+Porque mede erro absoluto de forma interpretável.
+
+---
+
+# “O sistema é confiável?”
+
+As métricas demonstram capacidade de generalização.
+
+---
+
+# “O sistema possui overfitting?”
+
+A validação cruzada ajuda a detectar isso.
+
+---
+
+# Diferença para Machine Learning
+
+Em muitos modelos tradicionais:
+
+```txt
+a interpretabilidade é baixa
+```
+
+---
+
+# No CBR
+
+As métricas podem ser associadas diretamente aos vizinhos recuperados.
+
+---
+
+# Isso melhora
+
+- explicabilidade;
+- auditabilidade;
+- confiança clínica.
+
+---
+
+# Conclusão
+
+O arquivo `evaluation.py` implementa a avaliação estatística do sistema CBR.
+
+Ele:
+
+- calcula métricas científicas;
+- mede desempenho;
+- valida generalização;
+- analisa erros;
+- fornece evidências quantitativas.
+
+Essa etapa é fundamental porque demonstra:
+
+```txt
+qualidade e confiabilidade do sistema
+```
+
+para uso acadêmico e experimental.

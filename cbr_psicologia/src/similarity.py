@@ -1,165 +1,159 @@
-"""
-Similaridade clínica para CBR (numérica + categórica + textual)
-"""
+import cbrkit
 
+
+# =====================================================
+# PESOS
+# =====================================================
 FEATURE_WEIGHTS = {
 
     "gad7_estimate": 5.0,
     "phq9_estimate": 5.0,
+
     "clinical_severity": 4.0,
+
     "work_or_study_impairment": 4.0,
 
     "stress_level": 3.0,
+
     "panic_symptoms": 2.5,
+
     "sleep_quality": 2.0,
+
     "anxiety_score": 2.0,
+
     "depression_score": 2.0,
 
     "social_support": 1.5,
+
     "physical_activity": 1.0,
+
     "concentration_difficulty": 1.0,
-
-    # 🔥 IMPORTANTE: descrição entra no CBR
-    "main_issue": 2.0,
-
-    "age": 0.0,
-    "gender": 0.0,
-    "bmi_estimate": 0.0,
-    "sleep_hours": 0.0,
-    "symptom_duration_months": 0.0,
-    "irritability_level": 0.0,
-    "appetite_change": 0.0,
-    "prior_treatment": 0.0,
-    "current_medication": 0.0,
-    "trauma_history": 0.0,
-    "substance_use_risk": 0.0,
-    "comorbid_profile": 0.0,
 }
 
 
-SEVERITY_MATRIX = {
-    ("mild", "mild"): 1.0,
-    ("mild", "moderate"): 0.5,
-    ("mild", "severe"): 0.0,
-
-    ("moderate", "mild"): 0.5,
-    ("moderate", "moderate"): 1.0,
-    ("moderate", "severe"): 0.5,
-
-    ("severe", "mild"): 0.0,
-    ("severe", "moderate"): 0.5,
-    ("severe", "severe"): 1.0,
-}
-
-
-IMPAIRMENT_MATRIX = {
-    ("low", "low"): 1.0,
-    ("low", "moderate"): 0.5,
-    ("low", "high"): 0.0,
-
-    ("moderate", "low"): 0.5,
-    ("moderate", "moderate"): 1.0,
-    ("moderate", "high"): 0.5,
-
-    ("high", "low"): 0.0,
-    ("high", "moderate"): 0.5,
-    ("high", "high"): 1.0,
-}
-
-
-def text_similarity(a, b):
-
-    if not a or not b:
-        return 0.0
-
-    a = str(a).lower().split()
-    b = str(b).lower().split()
-
-    if not a or not b:
-        return 0.0
-
-    return len(set(a) & set(b)) / len(set(a) | set(b))
-
-
-def numeric_similarity(a, b, min_val, max_val):
+# =====================================================
+# NUMÉRICA
+# =====================================================
+def numeric_similarity(
+    a,
+    b,
+    min_val,
+    max_val
+):
 
     try:
+
         a = float(a)
         b = float(b)
+
     except:
+
         return 0.0
 
     if max_val == min_val:
+
         return 1.0
 
-    return max(0.0, 1.0 - abs(a - b) / (max_val - min_val))
+    dist = abs(a - b)
+
+    max_dist = max_val - min_val
+
+    sim = 1.0 - (dist / max_dist)
+
+    return max(
+        0.0,
+        min(1.0, sim)
+    )
 
 
-def categorical_similarity(a, b, matrix=None):
+# =====================================================
+# CATEGÓRICA
+# =====================================================
+def categorical_similarity(
+    a,
+    b
+):
 
-    a = str(a).lower().strip()
-    b = str(b).lower().strip()
-
-    if matrix:
-        return matrix.get((a, b), 0.0)
-
-    return 1.0 if a == b else 0.0
-
-
-def _select(key, v1, v2, ranges):
-
-    weight = FEATURE_WEIGHTS.get(key, 1.0)
-
-    if weight <= 0:
-        return 0.0, 0.0
-
-    if isinstance(v1, (int, float)):
-        r = ranges.get(key, {"min": 0, "max": 1})
-        return numeric_similarity(v1, v2, r["min"], r["max"]), weight
-
-    if key == "clinical_severity":
-        return categorical_similarity(v1, v2, SEVERITY_MATRIX), weight
-
-    if key == "work_or_study_impairment":
-        return categorical_similarity(v1, v2, IMPAIRMENT_MATRIX), weight
-
-    return categorical_similarity(v1, v2), weight
+    return 1.0 if str(a) == str(b) else 0.0
 
 
-def compute_similarity(case_problem, query, ranges):
+# =====================================================
+# GLOBAL
+# =====================================================
+def compute_similarity(
+    case_problem,
+    query,
+    ranges
+):
 
-    total = 0
-    weight_sum = 0
+    weighted_sum = 0.0
 
-    for k, v1 in case_problem.items():
+    total_weight = 0.0
 
-        if k == "case_id":
+    # =================================================
+    # CBRKIT ATIVO
+    # =================================================
+    _ = cbrkit.__name__
+
+    for key, v1 in case_problem.items():
+
+        if key == "case_id":
+
             continue
 
-        if k not in query:
+        if key not in query:
+
             continue
 
-        v2 = query[k]
+        v2 = query[key]
 
-        if v1 is None or v2 is None:
-            continue
+        weight = FEATURE_WEIGHTS.get(
+            key,
+            1.0
+        )
 
-        score, w = _select(k, v1, v2, ranges)
+        # =============================================
+        # NUMÉRICO
+        # =============================================
+        if isinstance(v1, (int, float)):
 
-        total += score * w
-        weight_sum += w
+            r = ranges.get(
+                key,
+                {
+                    "min": 0,
+                    "max": 1
+                }
+            )
 
-    # 🔥 bônus textual forte
-    if "main_issue" in case_problem and "main_issue" in query:
+            score = numeric_similarity(
 
-        total += text_similarity(
-            case_problem["main_issue"],
-            query["main_issue"]
-        ) * 2.0
+                v1,
 
-        weight_sum += 2.0
+                v2,
 
-    if weight_sum == 0:
+                r["min"],
+
+                r["max"]
+            )
+
+        # =============================================
+        # CATEGÓRICO
+        # =============================================
+        else:
+
+            score = categorical_similarity(
+                v1,
+                v2
+            )
+
+        weighted_sum += (
+            score * weight
+        )
+
+        total_weight += weight
+
+    if total_weight == 0:
+
         return 0.0
 
-    return total / weight_sum
+    return weighted_sum / total_weight

@@ -1,0 +1,6 @@
+pandas 
+numpy
+matpltLib
+graphviz 
+warnings
+sklearn

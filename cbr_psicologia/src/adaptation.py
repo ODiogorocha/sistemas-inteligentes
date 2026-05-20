@@ -1,7 +1,3 @@
-"""
-CBR Adaptation - gera solução + dica clínica baseada nos vizinhos.
-"""
-
 from collections import Counter
 
 

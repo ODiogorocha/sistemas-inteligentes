@@ -1,3 +1,4 @@
 .env
+.venv
 cbrkit-demo
 _pycache_

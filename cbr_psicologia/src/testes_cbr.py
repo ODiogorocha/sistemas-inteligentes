@@ -21,7 +21,7 @@ try:
     from adaptation import adapt_solution
     from main import build_casebase, compute_ranges
 except ImportError as e:
-    print(f"❌ Erro ao importar módulos: {e}")
+    print(f" Erro ao importar módulos: {e}")
     sys.exit(1)
 
 def print_header(title):
@@ -94,6 +94,6 @@ if __name__ == "__main__":
     try:
         test_visual_adicao_remocao()
         test_visual_cbr_inédito()
-        print("\n✅ Todos os testes visuais foram concluídos!")
+        print("\n Todos os testes visuais foram concluídos!")
     except Exception as e:
-        print(f"\n❌ Ocorreu um erro durante a execução: {e}")
+        print(f"\n Ocorreu um erro durante a execução: {e}")

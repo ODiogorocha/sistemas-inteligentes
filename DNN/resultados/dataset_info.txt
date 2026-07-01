@@ -1,0 +1,16 @@
+============================================================
+INFORMAÇÕES DO DATASET
+============================================================
+
+Nome do dataset: heart.csv
+Total de amostras: 1025
+Total de atributos: 13
+Atributos: age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal
+Alvo (classificação): target
+Alvo (regressão): age
+Amostras treino: 820
+Amostras teste: 205
+
+Distribuição das classes:
+  Classe 1: 526 (51.3%)
+  Classe 0: 499 (48.7%)

@@ -1,0 +1,16 @@
+============================================================
+FEATURES SELECIONADAS
+============================================================
+
+Total: 10 features
+
+  1. cp
+  2. thalach
+  3. ca
+  4. oldpeak
+  5. thal
+  6. age
+  7. chol
+  8. exang
+  9. trestbps
+ 10. slope

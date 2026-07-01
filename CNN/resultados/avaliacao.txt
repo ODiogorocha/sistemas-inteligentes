@@ -1,0 +1,21 @@
+Perda: 0.3445
+Acurácia: 0.8870
+
+Matriz de Confusão
+[[866  30  82  22]
+ [  7 939  19  35]
+ [ 51  33 897  19]
+ [ 39  92  23 846]]
+
+Relatório de Classificação
+
+              precision    recall  f1-score   support
+
+    Airplane     0.8993    0.8660    0.8823      1000
+  Automobile     0.8583    0.9390    0.8968      1000
+        Ship     0.8786    0.8970    0.8877      1000
+       Truck     0.9176    0.8460    0.8803      1000
+
+    accuracy                         0.8870      4000
+   macro avg     0.8884    0.8870    0.8868      4000
+weighted avg     0.8884    0.8870    0.8868      4000

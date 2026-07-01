@@ -1,0 +1,25 @@
+{
+    "melhores_hiperparametros": {
+        "num_camadas": 2,
+        "num_neuronios": 48,
+        "taxa_aprendizado": 0.003063462210622081,
+        "taxa_dropout": 0.17837666334679464,
+        "ativacao": "tanh",
+        "otimizador": "rmsprop",
+        "neuronios_camada_1": 48,
+        "tamanho_batch": 64,
+        "epocas": 150
+    },
+    "melhor_score": 1.0,
+    "num_testes": 50,
+    "importancia_hiperparametros": {
+        "otimizador": 0.6422297004382628,
+        "ativacao": 0.14192781199397486,
+        "taxa_aprendizado": 0.04612834451463475,
+        "num_camadas": 0.04367993239788357,
+        "tamanho_batch": 0.039417962563545954,
+        "epocas": 0.0339047993927931,
+        "taxa_dropout": 0.030147294463523874,
+        "num_neuronios": 0.022564154235381273
+    }
+}

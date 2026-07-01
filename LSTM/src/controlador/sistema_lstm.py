@@ -15,22 +15,15 @@ class SistemaLSTM:
         self.carregador = CarregadorDados(
             "dados/passageiros.csv"
         )
-
         self.normalizador = Normalizador()
-
         self.gerador = GeradorSequencias(
             tamanho_janela=12,
             percentual_treino=0.80
         )
-
         self.rede = RedeLSTM()
-
         self.treinador = Treinador()
-
         self.previsor = Previsor()
-
         self.avaliador = Avaliador()
-
         self.graficos = Graficos()
 
     def executar(self):
@@ -68,22 +61,12 @@ class SistemaLSTM:
         )
 
         y_real = self.normalizador.desnormalizar(y_teste)
-
         y_previsto = self.normalizador.desnormalizar(previsoes)
-
-        resultado = self.avaliador.avaliar(
-            y_real,
-            y_previsto
-        )
+        resultado = self.avaliador.avaliar(y_real,y_previsto)
 
         self.avaliador.exibir(resultado)
-
         self.graficos.loss(historico)
-
-        self.graficos.previsao(
-            y_real,
-            y_previsto
-        )
+        self.graficos.previsao(y_real,y_previsto)
 
         self.graficos.serie_temporal(
             dados["Passengers"].values

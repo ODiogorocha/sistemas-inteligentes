@@ -442,8 +442,8 @@ class AnaliseRegularizacao:
             print(f"   {nome_curto}: {status} (dif={diff:.4f})")
         
         print("\n" + "=" * 60)
-        print("✅ Análise de regularização concluída!")
-        print(f"📁 Resultados salvos em: {self.diretorio}")
+        print(" Análise de regularização concluída!")
+        print(f" Resultados salvos em: {self.diretorio}")
         print("=" * 60)
 
 

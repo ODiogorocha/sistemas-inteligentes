@@ -1,16 +1,8 @@
-*Trabalho desenvolvido para a disciplina de Sistemas Inteligentes - UFSM - 2026*
-
-
----
-
-## relatorio.md (Para Entrega ao Professor)
-
 # Relatório Técnico - Trabalho Prático DNN
 
 ## Aprendizado Supervisionado com Seleção de Features e Otimização de Hiperparâmetros
 
 **Disciplina:** Sistemas Inteligentes
-**Professor:** Rômulo Costa, Júlio Salerno, Luis Alvaro
 **Data de Entrega:** Junho/2026
 **Autores:** Diogo
 

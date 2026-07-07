@@ -26,7 +26,7 @@ class Preprocessamento:
         colunas_categoricas = X.select_dtypes(include=['object']).columns.tolist()
         
         if colunas_categoricas:
-            print(f"📝 Codificando variáveis categóricas: {', '.join(colunas_categoricas)}")
+            print(f" Codificando variáveis categóricas: {', '.join(colunas_categoricas)}")
             
             for coluna in colunas_categoricas:
                 codificador = LabelEncoder()

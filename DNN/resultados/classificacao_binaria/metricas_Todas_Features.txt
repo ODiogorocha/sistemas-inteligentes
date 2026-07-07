@@ -2,12 +2,12 @@
 MÉTRICAS DE CLASSIFICAÇÃO
 ============================================================
 
-accuracy: 1.0000
+accuracy: 0.9951
 precision: 1.0000
-recall: 1.0000
-f1_score: 1.0000
+recall: 0.9905
+f1_score: 0.9952
 roc_auc: 1.0000
 Matriz de Confusão:
 [[100   0]
- [  0 105]]
+ [  1 104]]
 

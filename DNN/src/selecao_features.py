@@ -91,7 +91,7 @@ class SelecaoFeatures:
         plt.savefig(diretorio / 'importancia_features.png', dpi=300, bbox_inches='tight')
         plt.close()
         
-        print(f"📊 Gráfico de importância salvo em: {diretorio / 'importancia_features.png'}")
+        print(f" Gráfico de importância salvo em: {diretorio / 'importancia_features.png'}")
     
     def salvar_features_selecionadas(self, caminho_arquivo):
 

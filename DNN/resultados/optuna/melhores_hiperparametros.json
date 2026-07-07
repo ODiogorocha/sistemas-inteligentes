@@ -1,25 +1,27 @@
 {
     "melhores_hiperparametros": {
-        "num_camadas": 2,
+        "num_camadas": 4,
         "num_neuronios": 48,
-        "taxa_aprendizado": 0.003063462210622081,
-        "taxa_dropout": 0.17837666334679464,
+        "taxa_aprendizado": 0.0009717775305059633,
+        "taxa_dropout": 0.15585553804470548,
         "ativacao": "tanh",
-        "otimizador": "rmsprop",
+        "otimizador": "adam",
         "neuronios_camada_1": 48,
-        "tamanho_batch": 64,
-        "epocas": 150
+        "neuronios_camada_2": 32,
+        "neuronios_camada_3": 48,
+        "tamanho_batch": 32,
+        "epocas": 100
     },
     "melhor_score": 1.0,
     "num_testes": 50,
     "importancia_hiperparametros": {
-        "otimizador": 0.6422297004382628,
-        "ativacao": 0.14192781199397486,
-        "taxa_aprendizado": 0.04612834451463475,
-        "num_camadas": 0.04367993239788357,
-        "tamanho_batch": 0.039417962563545954,
-        "epocas": 0.0339047993927931,
-        "taxa_dropout": 0.030147294463523874,
-        "num_neuronios": 0.022564154235381273
+        "otimizador": 0.5187487512165686,
+        "ativacao": 0.33334759865141333,
+        "taxa_aprendizado": 0.06579255985869084,
+        "taxa_dropout": 0.03425065272683362,
+        "num_neuronios": 0.013939975100864008,
+        "num_camadas": 0.012849872693647311,
+        "epocas": 0.010619115053796646,
+        "tamanho_batch": 0.010451474698185751
     }
 }

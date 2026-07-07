@@ -1,8 +1,4 @@
-## README.md (Para o Vídeo - Roteiro)
-
-
 # Trabalho Prático DNN - Aprendizado Supervisionado
-
 ## Apresentação do Trabalho
 
 Este trabalho foi desenvolvido como parte da disciplina de Sistemas Inteligentes, com o objetivo de implementar um pipeline completo de Machine Learning utilizando Redes Neurais Multicamadas (MLP).
